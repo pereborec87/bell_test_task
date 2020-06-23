@@ -2,8 +2,20 @@ const webpack = require('webpack');
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 
+const ENV_PRODUCTION = 'production';
+const ENV_DEVELOPMENT = 'development';
+const ENV_WATCH = 'watch';
+const NODE_ENV = process.env.NODE_ENV || ENV_DEVELOPMENT;
+
 module.exports =  {
-    mode: "development",
+    mode: NODE_ENV === ENV_PRODUCTION ? ENV_PRODUCTION : ENV_DEVELOPMENT,
+    optimization: {
+        minimize: NODE_ENV === ENV_PRODUCTION
+    },
+    watch: NODE_ENV === ENV_WATCH,
+    watchOptions: {
+        aggregateTimeout: 100
+    },
     entry: {
         main: "./src/index.ts"
     },
