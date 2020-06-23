@@ -1,0 +1,30 @@
+.main-page-container {
+    flex: 1;
+    display: flex;
+    overflow-y: auto;
+
+    .elements {
+        flex: 1;
+        border: 1px solid gray;
+        padding: 4px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+
+        .element-row {
+            display: flex;
+            padding: 4px;
+
+            div {
+                flex: 1;
+            }
+        }
+
+        .source-elements {
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        
+    }
+}

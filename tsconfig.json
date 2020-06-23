@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "composite": true,
+    "outDir": "dist",
+    "rootDir": "src",
+    "removeComments": true,
+    "noImplicitUseStrict": true,
+    "preserveConstEnums": true,
+    "noUnusedLocals": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": false,
+    "allowSyntheticDefaultImports": true,
+  },
+  "include": [ "src" ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ],
+}

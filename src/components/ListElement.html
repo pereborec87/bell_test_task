@@ -1,0 +1,13 @@
+<div class="list-element-wrapper">
+    <div class="list-element-row">
+        <button v-if="element.items && element.items.length > 0" @click="onClick()">{{expanded ? 'Свернуть' : "Развернуть"}}</button>
+        <div>{{element.name}}</div>
+        <div>{{element.id}}</div>
+        <div>{{element.searchCount}}</div>
+        <button v-if="elementType === 'target'" @click="onRemoveElement(element)">-</button>
+        <button v-else-if="elementType === 'source'" @click="onAddElement(element)">+</button>
+    </div>
+    <div v-if="expanded" class="list-element-content">
+        <list-element v-for="item in element.items" :element="item" :key="item.id"/>
+    </div>
+</div>

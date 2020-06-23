@@ -1,0 +1,29 @@
+@import "history-page.scss";
+@import "main-page.scss";
+@import "list-element.scss";
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+.navigator-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .navigator-header {
+        font-size: 24px;
+        padding: 4px;
+    }
+
+    .navigator-navigation {
+        display: flex;
+        padding: 4px;
+
+        .navigation-item {
+            font-size: 20px;
+            padding: 4px;
+        }
+    }
+}

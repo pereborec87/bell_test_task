@@ -1,0 +1,11 @@
+<div class="history-page">
+    <div v-if="actions.length === 0">
+        История действий не найдена
+    </div>
+    <div class="history-action-row" v-for="action in actions" v-else>
+        <div>{{action.name}}</div>
+        <div>{{action.id}}</div>
+        <div>{{action.actionType}}</div>
+        <div>{{action.time}}</div>
+    </div>
+</div>

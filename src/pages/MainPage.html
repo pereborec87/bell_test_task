@@ -1,0 +1,13 @@
+<div class="main-page-container">
+    <div class="elements">
+        <div>
+            Поиск вхождений: <input @input="onChange($event)"/> <span v-show="searchStr !== ''">*Сортирую от большего количества вхождений к меньшему</span>
+        </div>
+        <div class="source-elements">
+            <list-element v-for="sourceItem in filteredItems" @add="onAddElement" :element="sourceItem" elementType="source" :key="sourceItem.id"/>
+        </div>
+    </div>
+    <div class="elements target-elements">
+        <list-element v-for="targetItem in targetItems" @remove="onRemoveElement" :element="targetItem" elementType="target" :key="targetItem.id"/>
+    </div>
+</div>
