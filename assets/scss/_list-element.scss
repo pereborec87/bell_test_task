@@ -6,13 +6,30 @@
         display: flex;
         padding: 4px;
 
-        div {
+        .text-field {
             flex: 1;
             padding: 0 8px;
+            line-height: 25px;
         }
 
         &:hover {
             background-color: lightblue;
+        }
+
+        .collapse-toggler {
+            width: 25px;
+            height: 25px;
+            background-size: 25px 25px;
+            background-image: url("../img/collapse-toggler.svg");
+            cursor: pointer;
+        }
+
+        .expand-toggler {
+            width: 25px;
+            height: 25px;
+            background-size: 25px 25px;
+            background-image: url("../img/expand-toggler.svg");
+            cursor: pointer;
         }
     }
 

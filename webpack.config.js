@@ -30,14 +30,6 @@ module.exports =  {
         }
     },
     plugins: [
-        // Необходим для библиотек, которые могут быть использованы в дальнейшем,
-        // чтобы библиотеки понимали, что нужна их продакшн версия без отладочных
-        // фич, типа ворнингов и т.п.
-        new webpack.DefinePlugin({
-            'process.env': {
-                'NODE_ENV': JSON.stringify(process.env.NODE_ENV)
-            }
-        }),
         new VueLoaderPlugin()
     ],
     module: {

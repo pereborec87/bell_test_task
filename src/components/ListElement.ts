@@ -24,7 +24,11 @@ export default class ListElement extends Vue {
         this.$emit("add", element);
     }
 
-    onClick(): void {
+    onExpandRow(): void {
         this.expanded = !this.expanded;
+    }
+
+    getTogglerClass(): string {
+        return this.expanded ? "expand-toggler" : "collapse-toggler" ;
     }
 }
