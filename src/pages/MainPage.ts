@@ -72,7 +72,7 @@ export default class MainPage extends Vue {
                 sourceItem.items.forEach((childItem: IElement) => {
                     let matchCount = childItem.name.split(this.searchStr).length - 1;
                     sourceItem.matchCount += matchCount;
-                })
+                });
             }
         });
     }
@@ -99,7 +99,7 @@ export default class MainPage extends Vue {
             this.onRemoveElement(this.targetItems[i]);
         }
     }
-    
+
     get filteredItems(): IElement[] {
         if (this.searchStr === "") {
             this.sourceItems.forEach((sourceItem: IElement) => {

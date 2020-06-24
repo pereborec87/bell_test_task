@@ -12,18 +12,18 @@ Vue.use(Vuex);
 
 function createVueInstance(): void {
     let routes = [{
-        path: '/',
-        redirect: { name: 'main' }
+        path: "/",
+        redirect: { name: "main" }
     }, {
-        path: '/main',
-        name: 'main',
+        path: "/main",
+        name: "main",
         component: MainPage
     }, {
-        path: '/history/:action',
-        name: 'history',
+        path: "/history/:action",
+        name: "history",
         component: HistoryPage,
         props: true
-    }]
+    }];
     // Создаю роутер
     let router = new VueRouter({
         routes
@@ -57,7 +57,7 @@ const storeOptions = {
             this.state.actions.push(historyAction);
         }
     }
-}
+};
 
 registerVueComponents();
 createVueInstance();

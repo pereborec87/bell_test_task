@@ -5,5 +5,5 @@ import Component from "vue-class-component";
     template: require("./Navigator.html")
 })
 export default class Navigator extends Vue {
-    
+
 }

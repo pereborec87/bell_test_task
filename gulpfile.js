@@ -3,6 +3,7 @@ const pump = require('pump');
 const flatten = require('gulp-flatten');
 const sass = require('gulp-sass');
 const clean = require('gulp-clean');
+const tslint = require('gulp-tslint');
 
 gulp.task('clean', function () {
     return gulp.src('./dist', {read: false})
@@ -31,4 +32,12 @@ gulp.task('scss-dev', [], (callback) => {
     });
 });
 
-gulp.task('build', ['clean', 'copy-images', 'scss']);
+gulp.task('lint', [], (callback) => {
+    pump([
+        gulp.src('src/**/*.ts'),
+        tslint({ fix: true }),
+        tslint.report()
+    ], callback);
+});
+
+gulp.task('build', ['lint', 'clean', 'copy-images', 'scss']);
