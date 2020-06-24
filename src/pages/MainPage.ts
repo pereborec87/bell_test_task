@@ -28,6 +28,9 @@ export default class MainPage extends Vue {
             });
     }
 
+    /**
+     * Метод, вызываемый на событие добавления элемента в списокa выбранных.
+     */
     public onAddElement(el: IElement): void {
         let index = this.sourceItems.findIndex((sourceEl: IElement) => {
             return sourceEl.id === el.id;
@@ -39,6 +42,9 @@ export default class MainPage extends Vue {
         this.addHistoryAction(el, ActionTypes.Add);
     }
 
+    /**
+     * Метод, вызываемый на событие удаления элемента из списка выбранных.
+     */
     public onRemoveElement(el: IElement): void {
         let index = this.targetItems.findIndex((targetEl: IElement) => {
             return targetEl.id === el.id;
@@ -50,7 +56,10 @@ export default class MainPage extends Vue {
         this.addHistoryAction(el, ActionTypes.Remove);
     }
 
-    public onChange($event): void {
+    /**
+     * Метод, вызываемый на событие изменения строки поиска.
+     */
+    public onChangeSearchStr($event): void {
         this.searchStr = $event.target.value;
         this.sourceItems.forEach((sourceItem: IElement) => {
             sourceItem.matchCount = 0;
@@ -58,13 +67,18 @@ export default class MainPage extends Vue {
             sourceItem.matchCount += matchCount;
             if (sourceItem.items) {
                 sourceItem.items.forEach((childItem: IElement) => {
-                    let matchCount = sourceItem.name.split(this.searchStr).length - 1;
-                    childItem.matchCount += matchCount;
+                    let matchCount = childItem.name.split(this.searchStr).length - 1;
+                    sourceItem.matchCount += matchCount;
                 })
             }
         });
     }
 
+    /**
+     * Добавление действия в историю.
+     * @param el Элемент, над которым совершено действие.
+     * @param actionType Тип действия.
+     */
     private addHistoryAction(el: IElement, actionType: ActionTypes): void {
         this.$store.commit("addHistoryAction", <IHistoryAction>{
             name: el.name,
@@ -73,22 +87,25 @@ export default class MainPage extends Vue {
             time: (new Date()).toTimeString()
         });
     }
+
+    /**
+     * Удаление всех записей из списка выбранных.
+     */
+    public onRemoveAll(): void {
+        for (let i = this.targetItems.length; i--; ) {
+            this.onRemoveElement(this.targetItems[i]);
+        }
+    }
     
     get filteredItems(): IElement[] {
         if (this.searchStr === "") {
             return this.sourceItems;
         } else {
+            // Фильтрация записей - берем только те, у которых есть вхождения подстроки поиска
             let filteredItems = this.sourceItems.filter((sourceItem: IElement) => {
-                sourceItem.matchCount = 0;
-                sourceItem.name.indexOf(this.searchStr) > -1 && sourceItem.matchCount++;
-                if (sourceItem.items) {
-                    sourceItem.items.forEach((childItem: IElement) => {
-                        childItem.name.indexOf(this.searchStr) > -1 && sourceItem.matchCount++;
-                    });
-                }
-
                 return sourceItem.matchCount > 0;
             });
+            // Сортировка записей, от большего числа вхождений к меньшему
             filteredItems.sort((item1: IElement, item2: IElement) => {
                 return item1.matchCount > item2.matchCount ? -1 : 1;
             });
