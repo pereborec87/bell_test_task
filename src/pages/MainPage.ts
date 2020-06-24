@@ -17,6 +17,8 @@ export default class MainPage extends Vue {
 
     private searchStr: string = "";
 
+    private selectedTargetItems: IElement[] = [];
+
     mounted(): void {
         const PUBLIC_API_URI = "https://api.jsonbin.io/b/5ef1285197cb753b4d15df1f/3";
         Axios.get(PUBLIC_API_URI)
@@ -54,9 +56,10 @@ export default class MainPage extends Vue {
         });
         if (index !== undefined) {
             this.targetItems.splice(index, 1);
+            this.sourceItems.push(el);
+            this.addHistoryAction(el, ActionTypes.Remove);
+            this.removeElementFromSelected(el);
         }
-        this.sourceItems.push(el);
-        this.addHistoryAction(el, ActionTypes.Remove);
     }
 
     /**
@@ -98,6 +101,37 @@ export default class MainPage extends Vue {
         for (let i = this.targetItems.length; i--; ) {
             this.onRemoveElement(this.targetItems[i]);
         }
+    }
+
+    /**
+     * Удаление выделенных элементов из списка выбранных.
+     */
+    public onRemoveSelected(): void {
+        for (let i = this.selectedTargetItems.length; i--; ) {
+            this.onRemoveElement(this.selectedTargetItems[i]);
+        }
+        this.selectedTargetItems = [];
+    }
+
+    /**
+     * Добавление элемента в список выделенных.
+     */
+    public onSelectTargetItem($event, selectedItem: IElement): void {
+        if ($event.target.checked) {
+            this.selectedTargetItems.push(selectedItem);
+        } else {
+            this.removeElementFromSelected(selectedItem);
+        }
+    }
+
+    /**
+     * Удаление элемента из выделенных.
+     */
+    private removeElementFromSelected(selectedItem: IElement): void {
+        let findIndex = this.selectedTargetItems.findIndex((targetItem: IElement) => {
+            return targetItem.id === selectedItem.id;
+        });
+        this.selectedTargetItems.splice(findIndex, 1);
     }
 
     get filteredItems(): IElement[] {

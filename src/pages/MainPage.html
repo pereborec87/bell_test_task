@@ -5,18 +5,22 @@
             <span v-show="searchStr !== ''" class="main-page-filter-warning">*Сортирую от большего количества вхождений к меньшему</span>
         </div>
         <div class="source-elements">
-            <div class="source-element-wrapper" v-for="sourceItem in filteredItems">
-                <list-element class="source-element-component" @add="onAddElement" :element="sourceItem" elementType="source" :key="sourceItem.id"/>
-                <div class="source-element-match-count" v-show="sourceItem.matchCount">{{sourceItem.matchCount}}</div>
+            <div class="element-wrapper" v-for="sourceItem in filteredItems" :key="sourceItem.id">
+                <list-element class="element-component" @add="onAddElement" :element="sourceItem" elementType="source"/>
+                <div class="element-match-count" v-show="sourceItem.matchCount">{{sourceItem.matchCount}}</div>
             </div>
         </div>
     </div>
     <div class="elements target-elements">
         <div>
             <button @click="onRemoveAll()" :disabled="targetItems.length === 0">Удалить все записи</button>
+            <button @click="onRemoveSelected()" :disabled="selectedTargetItems.length === 0">Удалить выбранные</button>
         </div>
         <div class="target-elements">
-            <list-element v-for="targetItem in targetItems" @remove="onRemoveElement" :element="targetItem" elementType="target" :key="targetItem.id"/>
+            <div class="element-wrapper" v-for="targetItem in targetItems" :key="targetItem.id">
+                <input type="checkbox" @click="onSelectTargetItem($event, targetItem)"/>
+                <list-element class="element-component" @remove="onRemoveElement" :element="targetItem" elementType="target"/>
+            </div>
         </div>
     </div>
 </div>

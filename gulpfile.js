@@ -26,7 +26,7 @@ gulp.task('scss', [], (callback) => {
     ], callback);
 });
 
-gulp.task('scss-dev', [], (callback) => {
+gulp.task('scss-watch', [], (callback) => {
     gulp.watch('./assets/scss/**/*.scss', function(event) {
         gulp.run('scss');
     });

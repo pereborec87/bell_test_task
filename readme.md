@@ -65,5 +65,5 @@ gulp scss
 
 4. Инкрементальное построение стилей
 ```sh
-gulp scss-dev
+gulp scss-watch
 ```
