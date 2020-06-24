@@ -5,11 +5,11 @@
     .list-element-row {
         display: flex;
         padding: 4px;
+        align-items: center;
 
         .text-field {
             flex: 1;
             padding: 0 8px;
-            line-height: 25px;
         }
 
         &:hover {

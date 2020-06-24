@@ -22,6 +22,9 @@ export default class MainPage extends Vue {
         Axios.get(PUBLIC_API_URI)
             .then((response: AxiosResponse) => {
                 this.sourceItems = response.data;
+                this.sourceItems.forEach((sourceItem: IElement) => {
+                    sourceItem.matchCount = 0;
+                });
             })
             .catch((error: AxiosError) => {
                 console.error("Ошибка получения данных.");
@@ -99,6 +102,9 @@ export default class MainPage extends Vue {
     
     get filteredItems(): IElement[] {
         if (this.searchStr === "") {
+            this.sourceItems.forEach((sourceItem: IElement) => {
+                sourceItem.matchCount = 0;
+            });
             return this.sourceItems;
         } else {
             // Фильтрация записей - берем только те, у которых есть вхождения подстроки поиска

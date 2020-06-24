@@ -20,9 +20,29 @@
             }
         }
 
-        .source-elements {
+        .source-elements, .target-elements {
             overflow-y: auto;
             flex: 1;
+        }
+
+        .source-elements {
+            .source-element-wrapper {
+                display: flex;
+                align-items: center;
+
+                .source-element-component {
+                    flex: 1;
+                }
+
+                .source-element-match-count {
+                    line-height: 25px;
+                    padding: 0 8px;
+                }
+            }
+        }
+
+        .main-page-filter-warning {
+            color: darkred;
         }
 
         

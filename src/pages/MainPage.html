@@ -1,16 +1,22 @@
 <div class="main-page-container">
     <div class="elements">
         <div>
-            Поиск вхождений: <input @input="onChangeSearchStr($event)"/> <span v-show="searchStr !== ''">*Сортирую от большего количества вхождений к меньшему</span>
+            Поиск вхождений: <input @input="onChangeSearchStr($event)"/>
+            <span v-show="searchStr !== ''" class="main-page-filter-warning">*Сортирую от большего количества вхождений к меньшему</span>
         </div>
         <div class="source-elements">
-            <list-element v-for="sourceItem in filteredItems" @add="onAddElement" :element="sourceItem" elementType="source" :key="sourceItem.id"/>
+            <div class="source-element-wrapper" v-for="sourceItem in filteredItems">
+                <list-element class="source-element-component" @add="onAddElement" :element="sourceItem" elementType="source" :key="sourceItem.id"/>
+                <div class="source-element-match-count" v-show="sourceItem.matchCount">{{sourceItem.matchCount}}</div>
+            </div>
         </div>
     </div>
     <div class="elements target-elements">
         <div>
             <button @click="onRemoveAll()" :disabled="targetItems.length === 0">Удалить все записи</button>
         </div>
-        <list-element v-for="targetItem in targetItems" @remove="onRemoveElement" :element="targetItem" elementType="target" :key="targetItem.id"/>
+        <div class="target-elements">
+            <list-element v-for="targetItem in targetItems" @remove="onRemoveElement" :element="targetItem" elementType="target" :key="targetItem.id"/>
+        </div>
     </div>
 </div>
